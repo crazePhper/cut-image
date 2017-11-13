@@ -2,14 +2,20 @@
     "name": "crazephper/yii2-admin-log",
     "description": "admin backend operating the mysql log",
     "type": "yii2-extension",
-    "license": "BSD2",
-    "minimum-stability": "dev",
+    "keywords": ["yii2","extension"],
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "composer require crazephper/yii2-admin-log",
+            "email": "254364502@qq.com"
+        }
+    ],
     "require": {
         "yiisoft/yii2": ">=2.0.6"
     },
     "autoload": {
         "psr-4": {
-            "crazephper\\admin_log\\": ""
+            "adminlog\\": ""
         }
     }
 }
