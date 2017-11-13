@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\models;
+namespace adminlog\models;
 
 use Yii;
 use yii\helpers\Url;

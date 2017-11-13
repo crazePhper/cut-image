@@ -1,12 +1,12 @@
 <?php
 
-namespace backend\controllers;
+namespace adminlog\controllers;
 use Yii;
 use yii\db\Query;
 use yii\data\Pagination;
-use models\AdminLog;
+use adminlog\models\AdminLog;
 
-class AdminLogController extends \backend\controllers\BaseController
+class AdminLogController extends \yii\web\Controller
 {
     public function actionIndex()
     {
