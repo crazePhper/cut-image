@@ -28,4 +28,14 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \adminlog\AutoloadExample::widget(); ?>```
+//main.php 配置文件 添加如下代码
+'controllerMap'=>[
+    'adminlog'=>[
+        'class'=>'adminlog\controllers\AdminLogController',
+    ]
+],
+'on beforeRequest' => function($event) {
+    \yii\base\Event::on(\yii\db\BaseActiveRecord::className(), \yii\db\BaseActiveRecord::EVENT_AFTER_INSERT, ['adminlog\models\AdminLog', 'write']);
+    \yii\base\Event::on(\yii\db\BaseActiveRecord::className(), \yii\db\BaseActiveRecord::EVENT_AFTER_UPDATE, ['adminlog\models\AdminLog', 'write']);
+    \yii\base\Event::on(\yii\db\BaseActiveRecord::className(), \yii\db\BaseActiveRecord::EVENT_AFTER_DELETE, ['adminlog\models\AdminLog', 'write']);
+},

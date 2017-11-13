@@ -26,25 +26,43 @@ class AdminLog extends ActiveRecord
     {
         return 'admin_log';
     }
-    
+
+    public static $types = [
+        1=>'更新',
+        2=>'删除',
+        3=>'添加',
+    ];
+
+    public function attributeLabels()
+    {
+        return [
+            'id'            => '编号',
+            'user_id'       => '用户',
+            'type'          => '类型',
+            'table_name'    => '表名',
+            'description'   => '描述',
+            'route'         => '路由',
+            'ip'            => 'IP',
+            'created_at'    => '时间',
+        ];
+    }
+
     public static function write($event)
     {
-        // 排除日志表自身,没有主键的表不记录（没想到怎么记录。。每个表尽量都有主键吧，不一定非是自增id）
-        if($event->sender instanceof \common\models\AdminLog || !$event->sender->primaryKey()) {
+        if($event->sender instanceof \adminlog\models\AdminLog || !$event->sender->primaryKey()) {
             return;
         }
+
         $type = NULL;
 
-        // 显示详情有待优化,不过基本功能完整齐全
         if ($event->name == ActiveRecord::EVENT_AFTER_INSERT) {
-            $description = "%s新增了表%s %s:%s的%s";
-            $type = 'add';
+            $type = 3;
         } elseif($event->name == ActiveRecord::EVENT_AFTER_UPDATE) {
-            $description = "%s修改了表%s %s:%s的%s";
-            $type = 'update';
-        } else {
-            $description = "%s删除了表%s %s:%s%s";
-            $type = 'delete';
+            $type = 1;
+        } elseif($event->name == ActiveRecord::EVENT_AFTER_DELETE) {
+            $type = 2;
+        }else{
+            return;
         }
 
         if (!empty($event->changedAttributes)) {
@@ -54,14 +72,16 @@ class AdminLog extends ActiveRecord
             }
             $desc = substr($desc, 0, -1);
         } else {
-            $desc = '';
+            return;
         }
-
-        $userName = Yii::$app->user->identity->username;
 
         $tableName = $event->sender->tableSchema->name;
 
-        $description = sprintf($description, $userName, $tableName, $event->sender->primaryKey()[0], $event->sender->getPrimaryKey(), $desc);
+        $types = self::$types;
+
+        $userName = Yii::$app->user->identity->username;
+
+        $description = $userName . $types[$type].'数据：主键 '.$event->sender->primaryKey()[0].'='.$event->sender->getPrimaryKey().',描述：'.$desc;
 
         $data = [
             'user_id'       => Yii::$app->user->id,
