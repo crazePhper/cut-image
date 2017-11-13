@@ -13,9 +13,8 @@ class AdminLogController extends \yii\web\Controller
 
         $dataProvider = new ActiveDataProvider([
             'query'=>$query,
-            'sort' => ['defaultOrder' => ['id' => SORT_ASC]],
             'pagination'=>[
-                'pagesize'=>2
+                'pagesize'=>20
             ]
         ]);
 
