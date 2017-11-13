@@ -1,0 +1,15 @@
+{
+    "name": "crazephper/yii2-admin-log",
+    "description": "admin backend operating the mysql log",
+    "type": "yii2-extension",
+    "license": "BSD2",
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "~2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "crazephper\\admin_log\\": ""
+        }
+    }
+}
