@@ -4,7 +4,7 @@ namespace backend\controllers;
 use Yii;
 use yii\db\Query;
 use yii\data\Pagination;
-use backend\models\AdminLog;
+use models\AdminLog;
 
 class AdminLogController extends \backend\controllers\BaseController
 {
