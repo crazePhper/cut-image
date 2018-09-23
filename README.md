@@ -40,4 +40,4 @@ Once the extension is installed, simply use it in your code by  :
     \yii\base\Event::on(\yii\db\BaseActiveRecord::className(), \yii\db\BaseActiveRecord::EVENT_AFTER_DELETE, ['adminlog\models\AdminLog', 'write']);
 },
 ```
-访问 www.url.com/adminlog
+访问 www.url.com/admin-log
