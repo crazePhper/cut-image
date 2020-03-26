@@ -1,12 +1,12 @@
 {
-    "name": "crazephper/yii2-admin-log",
+    "name": "easydowork/yii2-admin-log",
     "description": "admin backend operating the mysql log",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"],
     "license": "BSD-2-Clause",
     "authors": [
         {
-            "name": "crazePhper",
+            "name": "easydowork",
             "email": "254364502@qq.com"
         }
     ],
